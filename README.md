@@ -1,3 +1,9 @@
+## Use original repository!
+
+Please use it from author: https://github.com/warner/python-tweetnacl
+
+The encryption algorithm is broken here.
+
 # Python-TweetNaCl
 
 Note: you probably don't want to use this. Use [pynacl](https://github.com/pyca/pynacl) instead, which has more features and is better-maintained.
