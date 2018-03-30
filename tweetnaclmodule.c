@@ -276,12 +276,12 @@ PyObject *pycrypto_scalarmult(PyObject *self, PyObject *args, PyObject *kw) {
 }
 
 const char pycrypto_scalarmult__doc__[]=
-"crypto_scalarmult(n) -> q\n\n\
-This function multiplies a group element p by an integer n.\n\
+"crypto_scalarmult(n,p) -> q\n\n\
+The crypto_scalarmult_base function computes\n\
+the scalar product of a standard group element and an integer n.\n\
 It returns the resulting group element q of length crypto_scalarmult_BYTES.\n\
-The function raises an exception if len(p) is not crypto_scalarmult_BYTES.\n\
-It also raises an exception if len(n) is not crypto_scalarmult_SCALARBYTES.\n\
-This uses Curve25519.\n\
+It raises an exception if len(n) is not crypto_scalarmult_SCALARBYTES.\n\
+This uses Curve25519 and the standard base point '9'.\n\
 ";
 
 
@@ -314,12 +314,12 @@ PyObject *pycrypto_scalarmult_base(PyObject *self, PyObject *args, PyObject *kw)
 }
 
 const char pycrypto_scalarmult_base__doc__[]=
-"crypto_scalarmult_base(n,p) -> q\n\n\
-The crypto_scalarmult_base function computes\n\
-the scalar product of a standard group element and an integer n.\n\
+"crypto_scalarmult_base(n) -> q\n\n\
+This function multiplies a group element p by an integer n.\n\
 It returns the resulting group element q of length crypto_scalarmult_BYTES.\n\
-It raises an exception if len(n) is not crypto_scalarmult_SCALARBYTES.\n\
-This uses Curve25519 and the standard base point '9'.\n\
+The function raises an exception if len(p) is not crypto_scalarmult_BYTES.\n\
+It also raises an exception if len(n) is not crypto_scalarmult_SCALARBYTES.\n\
+This uses Curve25519.\n\
 ";
 
 
