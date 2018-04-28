@@ -52,6 +52,32 @@ PyObject *naclexception(const char *text) {
 }
 
 
+/* API: crypto_set_salsa_passes(passes); */
+PyObject *pycrypto_set_salsa_passes(PyObject *self, PyObject *args, PyObject *kw) {
+
+    Py_ssize_t passes = 0;
+    static const char *kwlist[] = {"passes", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, kw,
+                                     "|n:crypto_set_salsa_passes",
+                                     (char **)kwlist,
+                                     &passes)) {
+        return (PyObject *)0;
+    }
+
+    crypto_set_salsa_passes(
+            passes
+    );
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+
+const char pycrypto_set_salsa_passes__doc__[]=
+"crypto_set_salsa_passes(passes)\n\n\
+Set salsa20 passes count for the library\n\
+";
+
 /* API: a = crypto_onetimeauth(m,k); */
 PyObject *pycrypto_onetimeauth(PyObject *self, PyObject *args, PyObject *kw) {
 
@@ -1020,6 +1046,7 @@ This uses Curve25519, XSalsa20 (with a 24-byte nonce) and a 16-byte Poly1305 MAC
 ";
 
 static PyMethodDef nacl_methods[] = {
+    {"crypto_set_salsa_passes", (PyCFunction)pycrypto_set_salsa_passes, METH_VARARGS | METH_KEYWORDS, pycrypto_set_salsa_passes__doc__},
     {"crypto_onetimeauth", (PyCFunction)pycrypto_onetimeauth, METH_VARARGS | METH_KEYWORDS, pycrypto_onetimeauth__doc__},
     {"crypto_onetimeauth_verify", (PyCFunction)pycrypto_onetimeauth_verify, METH_VARARGS | METH_KEYWORDS, pycrypto_onetimeauth_verify__doc__},
     {"crypto_hash", (PyCFunction)pycrypto_hash, METH_VARARGS | METH_KEYWORDS, pycrypto_hash__doc__},
@@ -1111,7 +1138,7 @@ PyMODINIT_FUNC PyInit__tweetnacl(void) {
 PyMODINIT_FUNC init_tweetnacl(void) {
 #endif
     PyObject *m;
-    unsigned char dummy[1];
+    //unsigned char dummy[1];
 #if PY_MAJOR_VERSION >= 3
     m = PyModule_Create( &nacl_def );
     if (!m) return m;

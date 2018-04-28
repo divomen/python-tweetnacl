@@ -5,6 +5,7 @@ from . import _tweetnacl as _t
 def randombytes(count):
     return os.urandom(count)
 
+crypto_set_salsa_passes = _t.crypto_set_salsa_passes
 crypto_onetimeauth = _t.crypto_onetimeauth
 crypto_onetimeauth_verify = _t.crypto_onetimeauth_verify
 crypto_hash = _t.crypto_hash

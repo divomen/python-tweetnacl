@@ -9,6 +9,8 @@ typedef long long i64;
 typedef i64 gf[16];
 extern void randombytes(u8 *,u64);
 
+static int SALSA_PASSES = 20;
+
 static const u8
   _0[16],
   _9[32] = {9};
@@ -83,7 +85,7 @@ sv core(u8 *out,const u8 *in,const u8 *k,const u8 *c,int h)
   FOR(i,16) y[i] = x[i];
 
   /* passes are here */
-  FOR(i,17) {
+  FOR(i,SALSA_PASSES) {
     FOR(j,4) {
       FOR(m,4) t[m] = x[(5*j+4*m)%16];
       t[1] ^= L32(t[0]+t[3], 7);
@@ -183,6 +185,10 @@ static const u32 minusp[17] = {
   5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252
 } ;
 
+
+void crypto_set_salsa_passes(int passes) {
+    SALSA_PASSES = passes;
+}
 int crypto_onetimeauth(u8 *out,const u8 *m,u64 n,const u8 *k)
 {
   u32 s,i,j,u,x[17],r[17],h[17],c[17],g[17];
