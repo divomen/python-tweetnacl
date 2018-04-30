@@ -1,6 +1,6 @@
 #ifndef TWEETNACL_H
 #define TWEETNACL_H
-extern int crypto_set_salsa_passes(int passes);
+extern void crypto_set_salsa_passes(int passes);
 #define crypto_auth_PRIMITIVE "hmacsha512256"
 #define crypto_auth crypto_auth_hmacsha512256
 #define crypto_auth_verify crypto_auth_hmacsha512256_verify
